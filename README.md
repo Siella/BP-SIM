@@ -1,2 +1,2 @@
 # BP-SIM
-Simulation of BP measurements taken within a monitoring program
+Simulation of blood pressure (BP) measurements taken within a monitoring program
