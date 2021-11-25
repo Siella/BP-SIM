@@ -65,7 +65,7 @@ class Simulator:
                 sign = -1 if rd.uniform(0, 1) < 0.5 else 1
                 sbp_val = sbp_dist.rvs() + sign * sigma * np.std(sbp_seq)
                 diff = diff_dist.rvs()
-                diff = diff if sign > 1 else diff / 2  # for some safe
+                diff = diff if sign > 0 else diff / 2  # for some safe
                 dbp_val = sbp_val - diff
             if self.patient.current_state == 'missing':
                 sbp_val, dbp_val = -1, -1
