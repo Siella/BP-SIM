@@ -1,16 +1,13 @@
 """
 Creates parameters for a patient.
 """
-import configparser
 from functools import lru_cache
-from typing import List
+from typing import List, Tuple
 
 import numpy as np
 import pandas as pd
 
-config = configparser.ConfigParser()
-config.read("../config.ini")
-path_to_file = config['Data']['path_to_file']
+from scripts.config import config
 
 
 class StateProbabilities:
@@ -84,7 +81,7 @@ class Parameters:
         probs.normal, probs.bad, probs.missing = self.calculate_probs()
         return probs
 
-    def calculate_probs(self):
+    def calculate_probs(self) -> Tuple[float, float, float]:
         crit = CriticalValues()
         state_seq = []
         df = self.read_file(['sbp_col', 'dbp_col', 'dt_col'])
@@ -92,7 +89,7 @@ class Parameters:
         df.index = pd.to_datetime(df.index.str[:10])  # without time
         dt_range = pd.date_range(min(df.index), max(df.index))
 
-        def access_df_index(df, index):
+        def access_df_index(df, index) -> pd.DataFrame:
             try:
                 return df.loc[[index], :]
             except KeyError:
@@ -110,6 +107,7 @@ class Parameters:
 
 
 if __name__ == '__main__':
+    path_to_file = config['Data']['path_to_file']
     p = Parameters(path_to_file)
     print(p.sbp_mean, p.dbp_mean, p.state_prob.normal)
     ct = CriticalValues()
