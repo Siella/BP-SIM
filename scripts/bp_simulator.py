@@ -11,6 +11,12 @@ from scripts.config import config
 from scripts.patient import Patient
 
 
+class Measurement:
+    def __init__(self, sbp: float, dbp: float):
+        self.sbp = int(sbp)
+        self.dbp = int(dbp)
+
+
 class rvData(rv_continuous):
     data = np.sort(np.random.rand(100))
 
@@ -57,6 +63,7 @@ class Simulator:
             yield self.env.timeout(meas_time)
             self.patient.change_state()
 
+            sbp_val, dbp_val = -1, -1  # patient.current_state == 'missing'
             if self.patient.current_state == 'normal':
                 sbp_val = sbp_dist.rvs()
                 dbp_val = sbp_val - diff_dist.rvs()
@@ -67,10 +74,8 @@ class Simulator:
                 diff = diff_dist.rvs()
                 diff = diff if sign > 0 else diff / 2  # for some safe
                 dbp_val = sbp_val - diff
-            if self.patient.current_state == 'missing':
-                sbp_val, dbp_val = -1, -1
 
-            self.measurements.append((int(sbp_val), int(dbp_val)))
+            self.measurements.append(Measurement(sbp_val, dbp_val))
             self.measure_done.succeed()
             self.measure_done = self.env.event()
 
@@ -87,4 +92,4 @@ if __name__ == '__main__':
     sim = Simulator(p)
     sim.run_simulation(100)
     for meas in sim.measurements:
-        print(meas)
+        print(meas.sbp, meas.dbp)
