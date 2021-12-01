@@ -6,7 +6,7 @@ Initialize a patient via passing a path to data which contains series of systoli
 ```python
 p = Patient('PATH-TO-DATA')
 ```
-If you change the attribute `path_to_file`, other [attributes](https://github.com/Siella/BP-SIM/blob/main/scripts/patient.py) of the instance `p` will be changed automatically.
+If you change the attribute `path_to_file`, other [attributes](https://github.com/Siella/BP-SIM/blob/main/meta/classes.png) of the instance `p` will be changed automatically.
 ```python
 print(p.sbp_mean)  # one value
 p.path_to_file = 'NEW-PATH-TO-FILE'
