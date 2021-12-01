@@ -2,7 +2,7 @@
 Simulation of blood pressure (BP) measurements taken within a monitoring program.
 
 ## Quick Start
-Initialize a patient via passing a path to data which contains series of systolic BP (SBP), diastolic BP (DBP), and datetime. A CSV file should be tab-separated (see [examples](https://github.com/Siella/BP-SIM/tree/main/data)).
+Initialize a patient via passing a path to data which contains series of systolic BP (SBP), diastolic BP (DBP), and datetime. A CSV file should be tab-separated (see [examples](https://github.com/Siella/BP-SIM/tree/main/data)). Specify columns to use in a [config file](https://github.com/Siella/BP-SIM/blob/main/config.ini).
 ```python
 p = Patient('PATH-TO-DATA')
 ```
@@ -35,4 +35,4 @@ print(rules.apply())  # whether an event is a false alert (False) or normal one 
 There are some prepared rules but you can write your own as generators (see [examples](https://github.com/Siella/BP-SIM/blob/main/scripts/filter.py)) since rules are assumed to be changed dynamically.
 
 ## References
-- Nikolaeva K., Elkhovskaya L., Kovalchuk S. Patient measurements simulation and event processing in telemedicine systems // Procedia Computer Science - 2021, Vol. 193, pp. 122-130. https://doi.org/10.1016/j.procs.2021.10.012
+- Nikolaeva K., Elkhovskaya L., Kovalchuk S. Patient measurements simulation and event processing in telemedicine systems // Procedia Computer Science - 2021, Vol. 193, pp. 122-130. https://doi.org/10.1016/j.procs.2021.10.012.
