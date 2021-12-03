@@ -24,13 +24,13 @@ def test_patient_instance_creation():
     p = Patient(get_test_data_path())
     prob = p.state_prob
 
-    assert round(p.sbp_mean, 1) == 102.7, 'Wrong mean SBP calculation.'
-    assert round(p.dbp_mean, 1) == 65.3, 'Wrong mean DBP calculation.'
-    assert (.5, .25, .25) == (prob.normal,
+    assert round(p.sbp_mean, 1) == 122.7, 'Wrong mean SBP calculation.'
+    assert round(p.dbp_mean, 1) == 72.0, 'Wrong mean DBP calculation.'
+    assert (.25, .25, .5) == (prob.normal,
                               prob.missing,
                               prob.bad), 'Wrong probabilities calculation.'
 
-    assert p.initial_state == 'normal', 'Wrong initial state.'
+    assert p.initial_state == 'bad', 'Wrong initial state.'
     assert p.current_state == p.initial_state, 'Wrong current state.'
 
 
