@@ -22,17 +22,23 @@ The result of simulation is stored in `measurements` attribute.
 for meas in sim.measurements:
     print(meas.sbp, meas.dbp)
 ```
+Reset results of simulation and run another one.
+```python
+sim.reset_simulation()
+sim.run_simulation(100)
+```
 To perform information filtering, create rules for measurement processing and initialize `Filter` object.
 ```python
-rules = Filter(sim.measurements,
-               [
-                basic_rule_generator,
-                sd_rule_generator,
-                arv_rule_generator,
-               ])
-print(rules.apply())  # whether an event is a false alert (False) or normal one (True)
+data = sim.measurements
+f = Filter([
+            base_rule,
+            sd_rule,
+            arv_rule,
+           ])
+f.fit(data)
+print(f.apply(data))  # whether an event is a false alert (False) or normal one (True)
 ```
-There are some prepared rules but you can write your own as generators (see [examples](https://github.com/Siella/BP-SIM/blob/main/scripts/filter.py)) since rules are assumed to be changed dynamically.
+There are some prepared rules but you can write your own (see [examples](https://github.com/Siella/BP-SIM/blob/main/scripts/rules.py)).
 
 ## References
 - Nikolaeva K., Elkhovskaya L., Kovalchuk S. Patient measurements simulation and event processing in telemedicine systems // Procedia Computer Science - 2021, Vol. 193, pp. 122-130. https://doi.org/10.1016/j.procs.2021.10.012.
