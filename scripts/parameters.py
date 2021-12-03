@@ -27,10 +27,10 @@ class CriticalValues:
     """
 
     def __init__(self):
-        self.max_sbp = 180
-        self.min_sbp = 80
-        self.max_dbp = 120
-        self.min_dbp = 50
+        self.max_sbp = 135
+        self.min_sbp = 110
+        self.max_dbp = 85
+        self.min_dbp = 70
 
     def check_condition(self, sbp: float, dbp: float) -> str:
         if sbp is None or dbp is None:

@@ -41,8 +41,8 @@ class Simulator:
         self.patient = patient
         self.env = env
         self.take_measure = env.event()
-        self.proc_measure = [env.process(self.proc_measure())]
-        self.proc_time = env.process(self.proc_time())
+        self.proc_measure_ = [env.process(self.proc_measure())]
+        self.proc_time_ = env.process(self.proc_time())
         self.measure_done = env.event()
         self.measurements = []
 
@@ -80,8 +80,10 @@ class Simulator:
             self.measure_done = self.env.event()
 
     def run_simulation(self, n_days):
-        self.measurements = []
         self.env.run(n_days * 24)
+
+    def reset_simulation(self):
+        self.__init__(self.patient)
 
 
 if __name__ == '__main__':

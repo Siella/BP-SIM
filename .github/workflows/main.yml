@@ -18,6 +18,6 @@ jobs:
         run: |
           pip install flake8 isort pytest
           ls -la
-          flake8 .
-          isort --check .
+          flake8 --per-file-ignores="scripts/__init__.py:F401" scripts
+          isort --check scripts
           py.test tests
