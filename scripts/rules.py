@@ -17,7 +17,7 @@ def arv_generator(data: Sequence[float]) -> Generator:
     y = np.where(y == -1, np.nan, y)
     idx_finite = np.isfinite(y)
     if len(idx_finite) < 2:
-        raise ValueError(f'Not enough values to generate!')
+        raise ValueError('Not enough values to generate!')
     f_interp = interp1d(x[idx_finite], y[idx_finite])
     data_interp = f_interp(x)
 
@@ -58,8 +58,10 @@ def arv_rule_generator(data: Sequence[Measurement],
         x_sbp_prev = try_except_iteration(sbp_vals[:k][::-1], sbp_mean)
         x_dbp_prev = try_except_iteration(dbp_vals[:k][::-1], dbp_mean)
         yield lambda x: all(
-            [abs(x.sbp - x_sbp_prev) <= arv_sbp_mean + sigma * math.sqrt(arv_sbp_var),
-             abs(x.dbp - x_dbp_prev) <= arv_dbp_mean + sigma * math.sqrt(arv_dbp_var)]
+            [abs(x.sbp - x_sbp_prev) <= arv_sbp_mean +
+             sigma * math.sqrt(arv_sbp_var),
+             abs(x.dbp - x_dbp_prev) <= arv_dbp_mean +
+             sigma * math.sqrt(arv_dbp_var)]
         )
 
 

@@ -24,4 +24,4 @@ def test_sd_rule():
 def test_arv_rule():
     f = Filter([arv_rule])
     f.fit(data)
-    assert f.apply(data).tolist() == [[True, True, True]]
+    assert f.apply(data).tolist() == [[True, True, False]]
