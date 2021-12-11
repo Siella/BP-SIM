@@ -85,7 +85,7 @@ class Parameters:
         crit = CriticalValues()
         state_seq = []
         df = self.read_file(['sbp_col', 'dbp_col', 'dt_col'])
-        df = df.set_index(config['Data']['dt_col'])
+        df = df.set_index(config['Data']['dt_col']).dropna()
         df.index = pd.to_datetime(df.index.str[:10])  # without time
         dt_range = pd.date_range(min(df.index), max(df.index))
 
