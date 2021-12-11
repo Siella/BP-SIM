@@ -24,7 +24,7 @@ class Filter:
                 list(rule.apply(data)) for rule in self.rules
             ])
         except ValueError:
-            print('Fit a filter first!')
+            raise ValueError('Fit a filter first!')
 
 
 if __name__ == '__main__':
